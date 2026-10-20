@@ -1,0 +1,125 @@
+
+#root {
+  min-height: 100vh;
+}
+
+.dashboard {
+  width: min(760px, 92%);
+  margin: 0 auto;
+  padding: 48px 0;
+}
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  margin-bottom: 8px;
+  font-size: 2.2rem;
+}
+
+.page-header p,
+.league-card p,
+.elimination-card p {
+  color: #777;
+}
+
+.league-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.league-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.league-form button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font: inherit;
+  cursor: pointer;
+}
+
+.league-form button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.league-card,
+.elimination-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.league-card {
+  margin-bottom: 36px;
+}
+
+.league-card h2,
+.elimination-card h3 {
+  margin-top: 0;
+}
+
+.timeline-list {
+  list-style: none;
+  padding: 0;
+}
+
+.timeline-list li {
+  margin: 20px 0;
+  padding-left: 18px;
+  border-left: 2px solid #ddd;
+}
+
+.week-label {
+  margin-bottom: 8px;
+  color: #777;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.elimination-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.elimination-card h3 {
+  margin-bottom: 6px;
+}
+
+.elimination-card p {
+  margin-bottom: 0;
+}
+
+.score {
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.error {
+  color: #dc2626;
+}
+
+@media (max-width: 520px) {
+  .league-form {
+    flex-direction: column;
+  }
+
+  .elimination-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
