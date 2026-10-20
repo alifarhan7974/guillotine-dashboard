@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "./App.css";
 
-const API_URL = "http://localhost:8000";
+const API_URL = "";
 
 function App() {
   const [leagueId, setLeagueId] = useState("");
