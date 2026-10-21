@@ -13,7 +13,7 @@ COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev
 
 # Copy the backend application.
-COPY main.py sleeper_client.py guillotine.py ./
+COPY main.py sleeper_client.py league_service.py guillotine.py ./
 
 EXPOSE 8000
 

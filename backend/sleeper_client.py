@@ -1,47 +1,35 @@
 
 import httpx
 
+
 BASE_URL = "https://api.sleeper.app/v1"
 
 
-async def get_league(league_id: str) -> dict:
-    url = f"{BASE_URL}/league/{league_id}"
+class SleeperClient:
+    """Small, reusable client for the Sleeper API."""
 
-    async with httpx.AsyncClient(timeout=10.0) as client:
-        response = await client.get(url)
+    def __init__(self) -> None:
+        self._client = httpx.AsyncClient(base_url=BASE_URL, timeout=10.0)
+
+    async def close(self) -> None:
+        await self._client.aclose()
+
+    async def _get(self, path: str):
+        response = await self._client.get(path)
         response.raise_for_status()
         return response.json()
 
+    async def get_league(self, league_id: str) -> dict:
+        return await self._get(f"/league/{league_id}")
 
-async def get_users(league_id: str) -> list:
-    url = f"{BASE_URL}/league/{league_id}/users"
+    async def get_users(self, league_id: str) -> list:
+        return await self._get(f"/league/{league_id}/users")
 
-    async with httpx.AsyncClient(timeout=10.0) as client:
-        response = await client.get(url)
-        response.raise_for_status()
-        return response.json()
+    async def get_rosters(self, league_id: str) -> list:
+        return await self._get(f"/league/{league_id}/rosters")
 
+    async def get_matchups(self, league_id: str, week: int) -> list:
+        return await self._get(f"/league/{league_id}/matchups/{week}")
 
-async def get_rosters(league_id: str) -> list:
-    url = f"{BASE_URL}/league/{league_id}/rosters"
-
-    async with httpx.AsyncClient(timeout=10.0) as client:
-        response = await client.get(url)
-        response.raise_for_status()
-        return response.json()
-
-async def get_matchups(league_id: str, week: int) -> list:
-    url = f"{BASE_URL}/league/{league_id}/matchups/{week}"
-
-    async with httpx.AsyncClient(timeout=10.0) as client:
-        response = await client.get(url)
-        response.raise_for_status()
-        return response.json()
-
-async def get_nfl_state() -> dict:
-    url = f"{BASE_URL}/state/nfl"
-
-    async with httpx.AsyncClient(timeout=10.0) as client:
-        response = await client.get(url)
-        response.raise_for_status()
-        return response.json()
+    async def get_nfl_state(self) -> dict:
+        return await self._get("/state/nfl")
